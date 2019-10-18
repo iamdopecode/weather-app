@@ -13,5 +13,12 @@ res=requests.get(url)
 
 data=res.json()
 
-pprint(data)
+temp=data['main']['temp']
+
+wind_speed=data['wind']['speed']
+
+description=data['weather'][0]['description']
+print("The Temperature is: {}".format(temp))
+print("The Wind Speed is: {}".format(wind_speed))
+print("The Description is: {}".format(description))
 
