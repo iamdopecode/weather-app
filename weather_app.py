@@ -20,6 +20,12 @@ while True:
 
 
     import requests     # importing necessary libraries
+    import mysql.connector as sq
+    
+    # making connection with mysql
+    con=sq.connect(host="localhost",user="root",passwd="123456",database="weather",charset='utf8')
+    cur=con.cursor
+    
     city=input("Enter the City: ")      # taking the city name as input from user
     url='https://api.openweathermap.org/data/2.5/weather?appid=20689b2be145969d78f3bf4ab0a9ff58&q={}&units=metric'.format(city)
 
@@ -31,6 +37,9 @@ while True:
     def temperature():
         """ This function will tell us the temperature"""
         temp=data['main']['temp']
+        inserting="insert into weathert(temperature)values({})".format(temp)
+        cur.execute(inserting)
+        con.commit()
         print('The temperature of {} is'.format(city),temp,'degree celcius')
 
     def wind_speed():
@@ -75,7 +84,7 @@ while True:
         print('5.Description: ')
         print('6.Humidity: ')
         print('7.Country: ')
-        print('8.All')
+       
 
 
 
@@ -95,15 +104,7 @@ while True:
             humidity()
         elif choices=='7':
             country()
-        elif choices=='8':
-            temperature()
-            wind_speed()
-            latitude()
-            longitude()
-            description()
-            humidity()
-            country()        
-
+        
         
     print()
     statements()                                
