@@ -12,7 +12,7 @@ while True:
     ██║ █╗ ██║█████╗  ███████║   ██║   ███████║█████╗  ██████╔╝    ███████║██████╔╝██████╔╝
     ██║███╗██║██╔══╝  ██╔══██║   ██║   ██╔══██║██╔══╝  ██╔══██╗    ██╔══██║██╔═══╝ ██╔═══╝ 
     ╚███╔███╔╝███████╗██║  ██║   ██║   ██║  ██║███████╗██║  ██║    ██║  ██║██║     ██║     
-    ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝     ╚═╝     
+     ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝     ╚═╝     
                                                                                         
         """)
 
@@ -24,7 +24,7 @@ while True:
     
     # making connection with mysql
     con=sq.connect(host="localhost",user="root",passwd="123456",database="weather",charset='utf8')
-    cur=con.cursor
+    cur=con.cursor()
     
     city=input("Enter the City: ")      # taking the city name as input from user
     url='https://api.openweathermap.org/data/2.5/weather?appid=20689b2be145969d78f3bf4ab0a9ff58&q={}&units=metric'.format(city)
@@ -45,31 +45,49 @@ while True:
     def wind_speed():
         """ This function will tell the wind speed"""
         wind_speed=data['wind']['speed']
+        inserting="insert into weathert(wind_speed)values({})".format(wind_speed)
+        cur.execute(inserting)
+        con.commit()
         print('The wind speed of {} is '.format(city),wind_speed,'m/s')
 
     def latitude():
         """ This function will tell the latitude"""
         latitude=data['coord']['lat']
+        inserting="insert into weathert(latitude)values({})".format(latitude)
+        cur.execute(inserting)
+        con.commit()
         print('The latitude of {} is'.format(city),latitude,'degree')
 
     def longitude():
         """ This function will tell the longitude"""
         longitude=data['coord']['lon']
+        inserting="insert into weathert(longitude)values({})".format(longitude)
+        cur.execute(inserting)
+        con.commit()
         print('The longitude of {} is'.format(city),longitude,'degree')
         
     def description():
         """ This function will tell some description of the requested city"""
         description=data['weather'][0]['description']
+        inserting="insert into weathert(description)values({})".format(description)
+        cur.execute(inserting)
+        con.commit()
         print(description)
 
     def humidity():
         """ This function will tell the humidity level"""
         humidity=data['main']['humidity']
+        inserting="insert into weathert(humidity)values({})".format(humidity)
+        cur.execute(inserting)
+        con.commit()
         print('The humidity of {} is'.format(city),humidity,'%')
 
     def country():
         """ This function will tell the country of requested country """
         country=data['sys']['country']
+        inserting="insert into weathert(country)values({})".format(country)
+        cur.execute(inserting)
+        con.commit()
         print(country)
 
 
