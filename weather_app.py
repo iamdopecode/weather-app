@@ -23,7 +23,7 @@ while True:
     import mysql.connector as sq
     
     # making connection with mysql
-    con=sq.connect(host="localhost",user="root",passwd="123456",database="weather",charset='utf8')
+    con=sq.connect(host="localhost",user="root",passwd="kgp",database="weather",charset='utf8',buffered=True)
     cur=con.cursor()
     
     city=input("Enter the City: ")      # taking the city name as input from user
@@ -37,7 +37,11 @@ while True:
     def temperature():
         """ This function will tell us the temperature"""
         temp=data['main']['temp']
-        inserting="insert into weathert(temperature)values({})".format(temp)
+        dat="select curdate()"
+        cur.execute(dat)
+        oyt=cur.fetchone()
+        print(oyt)
+        inserting="insert into weathert(temperature,date)values({},'{}')".format(temp,dat)
         cur.execute(inserting)
         con.commit()
         print('The temperature of {} is'.format(city),temp,'degree celcius')
@@ -102,8 +106,21 @@ while True:
         print('5.Description: ')
         print('6.Humidity: ')
         print('7.Country: ')
-       
+        print('8.All: ')
 
+    def delex():
+        inserting="delete from weathert where (country)values({})".format(country)
+        cur.execute(inserting)
+        con.commit()
+
+    def read():
+        inserting="select * from weathert where city= '{}'".format(city)
+        cur.execute(inserting)
+        data=cur.fetchall()
+        con.commit()
+        for i in data:
+            print(i)
+        
 
 
     def main_menu():
@@ -122,8 +139,18 @@ while True:
             humidity()
         elif choices=='7':
             country()
+        elif choices== '8':
+            temperature()
+            wind_speed()
+            latitude()
+            longitude()
+            description()
+            humidity()
+            country()
+        elif choices== '9':
+            read()
         
-        
+            
     print()
     statements()                                
     print()                                             
