@@ -145,8 +145,7 @@ while True:
             description()
             humidity()
             country()
-        elif choices== '9':
-            read()
+        
         
             
     print()
