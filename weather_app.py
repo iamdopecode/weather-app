@@ -23,7 +23,7 @@ while True:
     import mysql.connector as sq
     
     # making connection with mysql
-    con=sq.connect(host="localhost",user="root",passwd="kgp",database="weather",charset='utf8',buffered=True)
+    con=sq.connect(host="localhost",user="root",passwd="123456",database="weather",charset='utf8',buffered=True)
     cur=con.cursor()
     
     city=input("Enter the City: ")      # taking the city name as input from user
@@ -37,11 +37,9 @@ while True:
     def temperature():
         """ This function will tell us the temperature"""
         temp=data['main']['temp']
-        dat="select curdate()"
-        cur.execute(dat)
         oyt=cur.fetchone()
         print(oyt)
-        inserting="insert into weathert(temperature,date)values({},'{}')".format(temp,dat)
+        inserting="insert into weathert(temperature)values({})".format(temp)
         cur.execute(inserting)
         con.commit()
         print('The temperature of {} is'.format(city),temp,'degree celcius')
