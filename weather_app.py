@@ -37,8 +37,6 @@ while True:
     def temperature():
         """ This function will tell us the temperature"""
         temp=data['main']['temp']
-        oyt=cur.fetchone()
-        print(oyt)
         inserting="insert into weathert(temperature)values({})".format(temp)
         cur.execute(inserting)
         con.commit()
@@ -74,7 +72,7 @@ while True:
         inserting="insert into weathert(description)values({})".format(description)
         cur.execute(inserting)
         con.commit()
-        print(description)
+        print('The description of {} is'.format(city),description)
 
     def humidity():
         """ This function will tell the humidity level"""
@@ -106,19 +104,6 @@ while True:
         print('7.Country: ')
         print('8.All: ')
 
-    def delex():
-        inserting="delete from weathert where (country)values({})".format(country)
-        cur.execute(inserting)
-        con.commit()
-
-    def read():
-        inserting="select * from weathert where city= '{}'".format(city)
-        cur.execute(inserting)
-        data=cur.fetchall()
-        con.commit()
-        for i in data:
-            print(i)
-        
 
 
     def main_menu():
