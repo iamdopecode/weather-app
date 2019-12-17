@@ -140,9 +140,4 @@ while True:
     print()                                     
     main_menu()                                     
                                     
-    """ Code by Shubham Sharma """                            
-
-
-                                                                      
-                                               
-    
+    """ Code by Shubham Sharma """
