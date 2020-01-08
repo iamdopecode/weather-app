@@ -1,5 +1,5 @@
 while True:
-
+    
     def banner():
         """ This is a attrartive banner for 
         our app, which has been made from ASCII code."""
@@ -23,7 +23,7 @@ while True:
     import mysql.connector as sq
     
     # making connection with mysql
-    con=sq.connect(host="localhost",user="root",passwd="123456",database="weather",charset='utf8',buffered=True)
+    con=sq.connect(host="localhost",user="root",passwd="kgp",database="weather",charset='utf8',buffered=True)
     cur=con.cursor()
     
     city=input("Enter the City: ")      # taking the city name as input from user
@@ -37,15 +37,17 @@ while True:
     def temperature():
         """ This function will tell us the temperature"""
         temp=data['main']['temp']
-        inserting="insert into weathert(temperature)values({})".format(temp)
+     
+        inserting="insert into weathert(city,temperature)values('{}',{})".format(city,temp)
         cur.execute(inserting)
         con.commit()
+        print(city)
         print('The temperature of {} is'.format(city),temp,'degree celcius')
 
     def wind_speed():
         """ This function will tell the wind speed"""
         wind_speed=data['wind']['speed']
-        inserting="insert into weathert(wind_speed)values({})".format(wind_speed)
+        inserting="insert into weathert(city,wind_speed)values('{}',{})".format(city,wind_speed)
         cur.execute(inserting)
         con.commit()
         print('The wind speed of {} is '.format(city),wind_speed,'m/s')
@@ -53,7 +55,7 @@ while True:
     def latitude():
         """ This function will tell the latitude"""
         latitude=data['coord']['lat']
-        inserting="insert into weathert(latitude)values({})".format(latitude)
+        inserting="insert into weathert(city,latitude)values('{}',{})".format(city,latitude)
         cur.execute(inserting)
         con.commit()
         print('The latitude of {} is'.format(city),latitude,'degree')
@@ -61,7 +63,7 @@ while True:
     def longitude():
         """ This function will tell the longitude"""
         longitude=data['coord']['lon']
-        inserting="insert into weathert(longitude)values({})".format(longitude)
+        inserting="insert into weathert(city,longitude)values('{}',{})".format(city,longitude)
         cur.execute(inserting)
         con.commit()
         print('The longitude of {} is'.format(city),longitude,'degree')
@@ -69,15 +71,15 @@ while True:
     def description():
         """ This function will tell some description of the requested city"""
         description=data['weather'][0]['description']
-        inserting="insert into weathert(description)values({})".format(description)
+        inserting="insert into weathert(city,description)values('{}','{}')".format(city,description)
         cur.execute(inserting)
         con.commit()
-        print('The description of {} is'.format(city),description)
+        print(description)
 
     def humidity():
         """ This function will tell the humidity level"""
         humidity=data['main']['humidity']
-        inserting="insert into weathert(humidity)values({})".format(humidity)
+        inserting="insert into weathert(city,humidity)values('{}',{})".format(city,humidity)
         cur.execute(inserting)
         con.commit()
         print('The humidity of {} is'.format(city),humidity,'%')
@@ -85,7 +87,7 @@ while True:
     def country():
         """ This function will tell the country of requested country """
         country=data['sys']['country']
-        inserting="insert into weathert(country)values({})".format(country)
+        inserting="insert into weathert(city,country)values('{}','{}')".format(city,country)
         cur.execute(inserting)
         con.commit()
         print(country)
@@ -140,4 +142,9 @@ while True:
     print()                                     
     main_menu()                                     
                                     
-    """ Code by Shubham Sharma """
+    """ Code by Shubham Sharma """                            
+
+
+                                                                      
+                                               
+    
